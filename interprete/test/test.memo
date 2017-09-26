@@ -1,0 +1,29 @@
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class LeerFichero {
+    @memorization
+    public String muestraContenido(int aa, double bb) throws FileNotFoundException, IOException {
+        String cadena;
+        String total = "";
+        FileReader f = new FileReader(archivo);
+        BufferedReader b = new BufferedReader(f);
+        while((cadena = b.readLine())!=null) {
+            total = total + cadena;
+        }
+        b.close();
+        return total;
+    }
+
+    public void main(String[] args) throws IOException {
+        muestraContenido("/home/mario/archivo.txt");
+    }
+
+    @memorization
+    public int sumarNumeros (double aa, double bb) {
+        return aa + bb;
+    }
+   
+}
