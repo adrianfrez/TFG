@@ -66,18 +66,8 @@ public class Main {
 					else {
 						FileReader f = new FileReader(args[1]);
 						ruta = args[1];
-						
-						BufferedReader b = new BufferedReader(f);
-						String cadena = "";
-						
-						while((cadena = b.readLine())!=null)
-							program = "" + cadena;
-						
-						f.close();
-						
-						System.out.println("Interpreting file " + program);
 		
-						memorizationLexer lexer = new memorizationLexer(new ANTLRFileStream(program));
+						memorizationLexer lexer = new memorizationLexer(new ANTLRFileStream(ruta));
 						CommonTokenStream tokens = new CommonTokenStream(lexer);
 						memorizationParser parser = new memorizationParser(tokens);
 		
