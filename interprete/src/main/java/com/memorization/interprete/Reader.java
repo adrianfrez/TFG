@@ -62,30 +62,6 @@ public class Reader {
 	 * @throws Exception 
 	 */
 	private void matchMetodoMemorizacion (String cabeceraMetodo) throws Exception {
-		System.out.println("matchMEtodoMemorization");
-		String cadena = "";
-		cabeceraMetodo = cabeceraMetodo.replace(" ", "");
-		String aux = "";
-		while((cadena = b.readLine())!=null) {
-			ultimaLineaLeida++;
-			aux = cadena;
-			aux = aux.replaceAll(" ", "");
-			if (aux.contains(cabeceraMetodo)){
-				System.out.println("FUNCIONA");
-        		break;
-        	}
-			else{
-				if (!cadena.contains("@memorization") && !cadena.contains("@Memorization"))
-					fw.write(cadena + "\n");
-			}
-        }
-		fw.flush();
-	}
-	
-	
-	
-	public void memorization (String cabeceraMetodo, String identificadorMetodo, String typeOfReturnMetodo,ArrayList<String> Argumentos) throws IOException {
-		
 		//Escribimos la clase de los argumentos del método
 		fw.write("\tprivate class " + identificadorMetodo + "_Argumentos { \n");
 		//Escribimos los argumentos
@@ -148,12 +124,12 @@ public class Reader {
 		
 		fw.write("\n");
 		
-		fw.write ("\t\tif ( " + nombreHashMap + ".containsKey(argumentos)\n");
-		fw.write("\t\t\treturn argumentos.get(argumentos);\n");
+		fw.write ("\t\tif ( " + nombreHashMap + ".containsKey(argumentos))\n");
+		fw.write("\t\t\treturn " + nombreHashMap + ".get(argumentos);\n");
 		
-		fw.write("\n");
+		fw.write("\t\t\t\n else {\n");
 		
-		fw.write("\t\treturn " + identificadorMetodo + "_Original ( " );
+		fw.write("\t\t\t" + "int aa = " + identificadorMetodo + "_Original ( " );
 		
 		for (int ii = 0; ii < Argumentos.size(); ii++){
 			if (ii == Argumentos.size() - 1)
@@ -161,8 +137,9 @@ public class Reader {
 			else
 				fw.write(nombreVariable (Argumentos.get(ii)) + ",");
 		}
-		
-		fw.write("\t}\n");
+		fw.write("\t\t\t" + nombreHashMap + ".set(argumentos,aa);\n"); 
+		fw.write("\t\t\treturn aa \n");
+		fw.write("\t\t}\n\t}\n");
 		
 		escribirMetodoOriginal(cabeceraMetodo, identificadorMetodo);
 		fw.flush();
