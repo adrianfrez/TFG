@@ -138,7 +138,7 @@ public class Reader {
 				fw.write(nombreVariable (Argumentos.get(ii)) + ",");
 		}
 		fw.write("\t\t\t" + nombreHashMap + ".set(argumentos,aa);\n"); 
-		fw.write("\t\t\treturn aa \n");
+		fw.write("\t\t\treturn aa; \n");
 		fw.write("\t\t}\n\t}\n");
 		
 		escribirMetodoOriginal(cabeceraMetodo, identificadorMetodo);
